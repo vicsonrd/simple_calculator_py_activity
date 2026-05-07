@@ -40,8 +40,21 @@ class CalculatorApp:
             res = perform_calculation(self.entry1.get(), self.entry2.get(), operation)
             self.result_var.set(f"Result: {res}")
             
+            # Step 4, 5, 6: Ask to try again
+            self.check_try_again()
+
         except Exception as e:
             messagebox.showerror("Error", str(e))
+
+    def check_try_again(self):
+        answer = messagebox.askyesno("Try Again?", "Would you like to perform another calculation?")
+        if answer:
+            self.entry1.delete(0, tk.END)
+            self.entry2.delete(0, tk.END)
+            self.result_var.set("Result: 0")
+        else:
+            messagebox.showinfo("Exit", "Thank you!")
+            self.root.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
