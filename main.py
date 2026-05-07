@@ -19,6 +19,21 @@ class CalculatorApp:
         self.entry2 = tk.Entry(root)
         self.entry2.pack()
 
+        # Operation Buttons
+        btn_frame = tk.Frame(root)
+        btn_frame.pack(pady=15)
+
+        ops = [("Add", "Addition"), ("Sub", "Subtraction"), 
+               ("Mul", "Multiplication"), ("Div", "Division")]
+
+        for text, op_type in ops:
+            btn = tk.Button(btn_frame, text=text, width=8, 
+                            command=lambda o=op_type: self.handle_click(o))
+            btn.pack(side="left", padx=2)
+
+    def handle_click(self, operation):
+        pass # To be implemented
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = CalculatorApp(root)
