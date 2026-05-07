@@ -1,3 +1,4 @@
+# main.py
 import tkinter as tk
 from tkinter import messagebox
 # Import the logic function from our separate file
@@ -36,11 +37,20 @@ class CalculatorApp:
 
     def handle_click(self, operation):
         try:
+            num1 = self.entry1.get()
+            num2 = self.entry2.get()
+            
             # Call the function from the logic file
-            res = perform_calculation(self.entry1.get(), self.entry2.get(), operation)
+            res = perform_calculation(num1, num2, operation)
             self.result_var.set(f"Result: {res}")
             
-            # Step 4, 5, 6: Ask to try again
+            # --- NEW CODE: Save to history file ---
+            with open("calculator_history.txt", "a") as history_file:
+                # Format a readable string, e.g., "5 Addition 10 = 15"
+                history_file.write(f"{num1} {operation} {num2} = {res}\n")
+            # --------------------------------------
+            
+            # Ask to try again
             self.check_try_again()
 
         except Exception as e:
