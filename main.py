@@ -1,4 +1,7 @@
 import tkinter as tk
+from tkinter import messagebox
+# Import the logic function from our separate file
+from calculator_logic import perform_calculation
 
 class CalculatorApp:
     def __init__(self, root):
@@ -32,7 +35,13 @@ class CalculatorApp:
             btn.pack(side="left", padx=2)
 
     def handle_click(self, operation):
-        pass # To be implemented
+        try:
+            # Call the function from the logic file
+            res = perform_calculation(self.entry1.get(), self.entry2.get(), operation)
+            self.result_var.set(f"Result: {res}")
+            
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
 
 if __name__ == "__main__":
     root = tk.Tk()
